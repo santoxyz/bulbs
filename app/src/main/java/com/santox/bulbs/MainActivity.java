@@ -1,6 +1,5 @@
 package com.santox.bulbs;
 
-import android.support.constraint.solver.ArrayLinkedVariables;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;

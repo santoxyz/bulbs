@@ -1,4 +1,6 @@
 package com.santox.bulbs;
+import android.os.StrictMode;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -22,11 +24,16 @@ public class GenericDevice {
         byte[] bytes = new byte[6];
         for(int i=0;i<mac.length();i+=2){
             String sub = mac.substring(i,i+2);
-            bytes[i/2] = Byte.valueOf(mac.substring(i,i+2),16);
+            bytes[i / 2] = (byte) ((Character.digit(mac.charAt(i), 16) << 4)
+                    + Character.digit(mac.charAt(i+1), 16));
+
         }
         return bytes;
     }
     public GenericDevice(int type, String ip, String mac){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
         setType(type);
         setIp(ip);
         setMac(mac);
@@ -117,7 +124,7 @@ public class GenericDevice {
 
     public byte[] send_packet(byte command, byte[] payload) {
         count = (count + 1) & 0xffff;
-        byte[] packet = new byte[0x38 + payload.length];
+        byte[] packet = new byte[0x38];
 
         packet[0x00] = (byte)0x5a;
         packet[0x01] = (byte)0xa5;
@@ -171,9 +178,10 @@ public class GenericDevice {
 
         }
 
-        for (int i=0;i< payload.length;i++){
-            packet[0x36 + i] = payload[i];
-        }
+        byte[] tempPacket = new byte[packet.length + payload.length];
+        System.arraycopy(packet,0,tempPacket,0,packet.length);
+        System.arraycopy(payload,0,tempPacket, packet.length,payload.length);
+        packet = tempPacket;
         //for i in range(len(payload)):
         //packet.append(payload[i])
 
@@ -212,7 +220,7 @@ public class GenericDevice {
 
             System.out.println(response);
 
-            return buffer;
+            return response.getData();
 
         } catch (Exception e){
             System.out.println("exception");
