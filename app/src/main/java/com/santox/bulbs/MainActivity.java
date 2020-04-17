@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         btnIngresso = (Button) findViewById(R.id.button_ingresso);
         btnSoggiorno = (Button) findViewById(R.id.button_soggiorno);
 
-        bulbsIngresso.add(new Bulb(0x60c7,"192.168.11.10", "9b99d8a7df24"));
-        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.8", "cf99d8a7df24"));
-        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.9", "85a2d8a7df24"));
-        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.9", "85a2d8a7df24"));
+        //bulbsIngresso.add(new Bulb(0x60c7,"192.168.11.10", "9b99d8a7df24"));
+        //bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.8", "cf99d8a7df24"));
+        //bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.9", "85a2d8a7df24"));
+        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.11", "4cb5d8a7df24"));
 
         btnSoggiorno.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +41,18 @@ public class MainActivity extends AppCompatActivity {
                     b.auth();
                     state_soggiorno = !state_soggiorno;
                     b.set_state(state_soggiorno);
+                    b.get_state();
+                }
+            }
+        });
+
+        btnIngresso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Bulb b: bulbsIngresso) {
+                    b.auth();
+                    state_ingresso = !state_ingresso;
+                    b.set_state(state_ingresso);
                 }
             }
         });
