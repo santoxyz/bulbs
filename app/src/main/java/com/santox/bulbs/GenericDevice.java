@@ -1,4 +1,5 @@
 package com.santox.bulbs;
+import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -60,9 +61,11 @@ public class GenericDevice {
         return bytes;
     }
     public GenericDevice(int type, String ip, String mac){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
-        StrictMode.setThreadPolicy(policy);
         setType(type);
         setIp(ip);
         setMac(mac);
