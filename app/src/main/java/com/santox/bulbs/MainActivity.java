@@ -29,10 +29,10 @@ public class MainActivity extends Activity {
         btnIngresso = (Button) findViewById(R.id.button_ingresso);
         btnSoggiorno = (Button) findViewById(R.id.button_soggiorno);
 
-        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.10", "9b99d8a7df24"));
-        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.8", "cf99d8a7df24"));
-        bulbsIngresso.add(new Bulb(0x60c7,"192.168.11.9", "85a2d8a7df24"));
-        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.11", "4cb5d8a7df24"));
+        bulbsIngresso.add(new Bulb(0x60c7,"192.168.11.101", "85a2d8a7df24"));
+        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.102", "4cb5d8a7df24"));
+        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.103", "cf99d8a7df24"));
+        bulbsSoggiorno.add(new Bulb(0x60c7,"192.168.11.104", "9b99d8a7df24"));
 
         btnSoggiorno.setOnClickListener(new View.OnClickListener() {
             @Override
